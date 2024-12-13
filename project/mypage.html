@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8"/>
+  <style>
+    header{
+      font-weight: bolder;
+      background-color: aquamarine;
+    }
+    title{
+      border-radius: 20px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      
+    }
+    .button {
+      background-color: skyblue;
+      color: black;
+      border: none;
+      padding: 20px 60px;
+      border-radius: 50px;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+    .div {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    fieldset {
+      border: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+    legend {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .date {
+      display: flex;
+      gap: 20px; /* 간격 추가 */
+      padding: 20px;
+    }
+    .calendar {
+      padding: 40px;
+      border: solid 1px #777;
+    }
+    .information {
+      border: 5px solid #0000;
+      display: inline-block;
+      
+
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* 입력 필드 간 간격 추가 */
+      border: 1px solid black;
+      display: flex;
+    }
+    p{
+      text-align: center;
+      font-size: large;
+    }
+    .reservation{
+      border: 5px solid #0000;
+      display: inline-block;
+      width: 30%;
+      height: 30%;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <div class="header">
+  <title>마이 페이지</title></div>
+  </head>
+  <body>
+    <fieldset>
+      <legend>
+        <h2> <div class="header"></div>MY PAGE</div></h2>
+      </legend>
+      <div class="div">
+        <button type="button" class="button" onclick="location.href='MAIN.html'">HOME</button>
+        <button type="button" class="button" onclick="location.href='MAIN.html'">LOGOUT</button>
+      </div>
+    </fieldset>
+
+    <div class="date">
+      <iframe
+        class="calendar"
+        src="https://calendar.google.com/calendar/embed?height=500&wkst=1&ctz=Asia%2FSeoul&showPrint=0&src=OGFhZmI5YTA2OTQ4YTFmMGNkOTY3OWY0NzNkZjk4YzJhNWMzYTMyNWYyMTM3MzM3MDA4ZjMwYmJmZmY2NDQzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%237CB342"
+        style="border:solid 1px #777"
+        width="500"
+        height="500"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
+
+      <div class="information">
+        <form action='a.jsp'>
+          <p class="box">정보 수정</p>
+          <label>ID: <input type='text' value=''/></label><br>
+          <label>PASSWORD: <input type='password' /></label><br>
+          <label>이름: <input type="text" value=''/></label><br>
+          <label>연락처: <input type="tel" name="tel" /></label><br>
+          <label>이메일: <input type="email" name="email"/></label><br>
+          <input type="submit" value="submit">
+          <input type='reset' value="Reset">
+        </form></div>
+        <div class="reservation">
+          <p>예약 관리</p>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
