@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form id="postForm" action="/ehr/user/doRetrieve" method="POST">
+        <input type="hidden" name="pageNo" value="1">
+        <input type="hidden" name="pageSize" value="10">
+        </form>
+        <script>
+            document.getElementById("postForm").submit();
+        </script>
+
+        <div>2024.12.20</div>
+    </body>
+</html>
