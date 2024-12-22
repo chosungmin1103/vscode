@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>마이 페이지</title>
+  <style>
+    body {
+      width: 1280px;
+      height: 768px;
+      margin: 10px auto;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      font-weight: bolder;
+      background-color: aquamarine;
+      text-align: left;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 30px;
+      font-size: larger;
+    }
+    h2 {
+      margin: 0;
+    }
+    .button {
+      background-color: skyblue;
+      color: black;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    .div {
+      text-align: right;
+    }
+    .date {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px;
+    }
+    .calendar {
+      width: 500px;
+      height: 500px;
+    }
+    .information,
+    .reservation {
+      width: calc((1280px - 500px - 60px) / 2);
+      height: 500px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    form input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    form .save-btn {
+      background-color: skyblue;
+    }
+    form .cancel-btn {
+      background-color: lightcoral;
+    }
+    .reservation-block {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #777;
+      text-align: center;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body id="container">
+  <!-- 헤더 -->
+  <header>
+    <h2>MY PAGE</h2>
+    <div class="div">
+      <button type="button" class="button" onclick="goToHome()">HOME</button>
+      <button type="button" class="button" onclick="logout()">LOGOUT</button>
+    </div>
+  </header>
+  
+  <!-- 날짜와 정보 수정 폼 -->
+  <div class="date">
+    <!-- 구글 캘린더 -->
+    <iframe
+      class="calendar"
+      src="https://calendar.google.com/calendar/embed?height=500&wkst=1&ctz=Asia%2FSeoul&showPrint=0&src=OGFhZmI5YTA2OTQ4YTFmMGNkOTY3OWY0NzNkZjk4YzJhNWMzYTMyNWYyMTM3MzM3MDA4ZjMwYmJmZmY2NDQzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%237CB342"
+      frameborder="0" scrolling="no">
+    </iframe>
+
+    <!-- 정보 수정 폼 -->
+    <div class="information">
+      <form action='a.jsp'>
+        <label>ID: <input type='text' placeholder="아이디 입력"/></label>
+        <label>PASSWORD: <input type='password' placeholder="비밀번호 입력"/></label>
+        <label>이름: <input type="text" placeholder="이름 입력"/></label>
+        <label>연락처: <input type="tel" placeholder="연락처 입력"/></label>
+        <label>이메일: <input type="email" placeholder="이메일 입력"/></label>
+        <div class="btn-container">
+          <button type="submit" class="save-btn" onclick="return confirmSave()">저장</button>
+          <button type="reset" class="cancel-btn" onclick="return confirmCancel()">취소</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 예약 관리 -->
+    <div class="reservation">
+      <p style="font-weight: bold; font-size: 18px;">예약 관리</p>
+      <div class="reservation-block">예약 날짜</div>
+      <div class="reservation-block">예약 병원</div>
+      <div class="reservation-block">예약 상태</div>
+    </div>
+  </div>
+
+  <script>
+    function goToHome() {
+    if (confirm("홈페이지로 이동하시겠습니까?")) {
+      location.href = "MAIN.html";
+    }
+  }
+  
+  // LOGOUT 버튼
+  function logout() {
+    if (confirm("로그아웃 하시겠습니까?")) {
+      location.href = "MAIN.html";
+    }
+  }
+  
+  // 저장 버튼
+  function confirmSave() {
+    return confirm("저장하시겠습니까?");
+  }
+  
+  // 취소 버튼
+  function confirmCancel() {
+    return confirm("취소하시겠습니까?");
+  }
+  </script>
+    <!-- 외부 스크립트 연결 -->
+    <script src="mypage.js"></script>
+</body>
+</html>
