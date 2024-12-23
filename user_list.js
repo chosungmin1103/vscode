@@ -52,10 +52,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Move to register
     if (moveToRegButton) {
-        moveToRegButton.addEventListener("click", function () {
+        moveToRegButton.addEventListener("pageDoRetrieve", function () {
             confirmAction("회원 등록 화면으로 이동 하시겠습니까?", function () {
                 window.location.href = "/ehr/user/user_reg_index.do";
             });
+
+            function pageDoRetrieve(url,pageNo){
+                let userForm = document.userForm;
+                userForm.pageNo.value = pageNo;
+                userForm.action = url;
+                userForm.submit();
+            }
+            
         });
     }
 });
