@@ -1,81 +1,141 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="/ehr/resources/assets/images/favicon.ico" type="image/x-icon" >
-<link rel="stylesheet" href="/ehr/resources/assets/css/user/form.css">
+document.addEventListener('DOMContentLoaded',function() {
+  console.log('DOMContentLoaded');
 
-<script src="/ehr/resources/assets/js/jquery_3_7_1.js"></script>
-<script src="/ehr/resources/assets/js/cmn/common.js"></script>
-<script src="/ehr/resources/assets/js/user/user_mng.js"></script>
-<title>회원 관리</title>
-</head>
-<body>
-    <div class="form-container">
-  <h2>회원관리</h2>   
-  <hr class="title-underline"/>
+  const doSaveButton = document.querySelector("#doSave");
 
-      <!-- Button area -->
-  <div class="button-area">
-      <input type="button" id="moveToList" value="목록">
-      <input type="button" id="doUpdate" value="수정">
-      <input type="button" id="doDelete" value="삭제">
-  </div>
-  <!--// Button area --> 
-  
-         <!-- form area -->
-  <form action="#" class="form" >
-      <div class="form-group">
-          <label for="userId">아이디</label>
-          <input type="text"  maxlength="30" name="userId" id="userId" value="${vo.userId }" disabled="disabled">
-      </div>
-      
-      <div class="form-group">
-          <label for="name">이름</label>
-          <input type="text"  maxlength="7" name="name" id="name" value="${vo.name }" >
-      </div>   
-           
-      <div class="form-group">
-          <label for="password">비밀번호</label>
-          <input type="password"  maxlength="30" name="password" id="password" value="${vo.password }" >
-      </div>
- 
-      <!-- 등급 -->        
-      <div class="form-group">  
-          <label for="grade">등급</label>
-          <select name="grade" id="grade" >
-              <option value="BASIC">BASIC</option>
-              <option value="SILVER">SILVER</option>
-              <option value="GOLD">GOLD</option>
-          </select>
-      </div>  
-              
-              
-      <div class="form-group">
-          <label for="login">로그인</label>
-          <input type="number"  min="0" max="1000000" step="1" name="login" id="login" value="${vo.login }" >
-      </div>      
-      
-      <div class="form-group">
-          <label for="recommend">추천</label>
-          <input type="number"  min="0" max="1000000" step="1" name="recommend" id="recommend" value="${vo.recommend }" >
-      </div>    
-      <div class="form-group">
-          <label  for="email">이메일</label>
-          <input type="email"  maxlength="320" name="email" id="email" value="${vo.email }" >
-      </div>                                
-  </form>
-  <!--// form area -->
+  //userId
+  const userIdInput = document.querySelector("#userId");
+  //이름
+  const nameInput = document.querySelector("#name");
+  //비밀번호
+  const passwordInput = document.querySelector("#password");
+  //로그인
+  const loginInput = document.querySelector("#login");
+  //추천
+  const recommendInput = document.querySelector("#recommend");
+  //이메일
+  const emailInput = document.querySelector("#email");
+  //등급
+  const gradeSelect = document.querySelector("#grade");
 
-          <label for="recommend">추천</label>
-          <input type="number"  min="0" max="1000000" step="1" name="recommend" id="recommend"  >
-      </div>    
-      <div class="form-group">
-          <label  for="email">이메일</label>
-          <input type="email"  maxlength="320" name="email" id="email"  >
-      </div>                                
-  </div>
-</body>
-</html>
+
+  doSaveButton.addEventListener("click",function(event) {
+    console.log('doSaveButton click');
+
+    //Validation
+    console.log('userIdInput.value',userIdInput.value);
+    console.log('gradeSelect.value',gradeSelect.value);
+
+    if(isEmpty(userIdInput.value) === true) {
+      alert('사용자 ID를 입력하세요.');
+      userIdInput.focus();
+      return;
+    }
+
+    if(isEmpty(nameInput.value) === true) {
+      alert('이름을 입력하세요.');
+      nameInput.focus();
+      return;
+    }
+
+    if(isEmpty(passwordInput.value) === true) {
+      alert('비밀번호를 입력하세요.');
+      passwordInput.focus();
+      return;
+    }
+
+    if(isEmpty(loginInput.value) === true) {
+      alert('로그인 횟수를 입력하세요.');
+      logindInput.focus();
+      return;
+    }
+
+    if(isEmpty(recommendInput.value) === true) {
+      alert('추천 횟수를 입력하세요.');
+      recommendInput.focus();
+      return;
+    }
+
+    if(isEmpty(emailInput.value) === true) {
+      alert('이메일을 입력하세요.');
+      emailInput.focus();
+      return;
+    }
+
+    if(confirm('회원 등록 하시겠습니까?') === false) return;
+
+    // fetch("/ehr/user/doSave.do",{
+    //   method: 'POST',
+    //   //서버가 데이터를 URL 인코딩된 문자열로 해석되도록 저장.
+    //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    //   body: new URLSearchParams({ //데이터를 URL 인코딩된 문자열로 반환
+    //           "userId": userIdInput.value,
+    //           "name": nameInput.value,
+    //           "password": passwordInput.value,
+    //           "login": loginInput.value,
+    //           "recommend": recommendInput.value,
+    //           "grade": gradeSelect.value,
+    //           "email": emailInput.value
+    //   })
+    // })
+    // .then(response => {
+    //   console.log("success response:"+response);
+    //   return response.json();//서버 응답 본문을 JSON 형태로 파싱
+    // })
+    // .then(data => {
+    //   console.log("data :"+data);
+    //   if(message.messageId == 1) { //등록 성공
+    //      alert(message.message);
+    //      //목록으로 화면 이동.
+    //      window.location.href = '/ehr/user/doRetrieve.do';
+    //   }
+    //   else {
+    //      alert(message.message);
+    //   }
+    // });
+    // .catch(error => console.error('Error:',error));
+    
+    $.ajax({
+      type: "POST",
+      url: "/ehr/user/doSave.do",
+      async: true,
+      dataType: "html",
+      data: {
+          "userId": userIdInput.value,
+          "name": nameInput.value,
+          "password": passwordInput.value,
+          "login": loginInput.value,
+          "recommend": recommendInput.value,
+          "grade": gradeSelect.value,
+          "email": emailInput.value
+      },
+      success: function(response) {
+          console.log("success response:" + response);
+          const message = JSON.parse(response);
+          if(message.messageId == 1) { //등록 성공
+            alert(message.message);
+            //목록으로 화면 이동.
+            window.location.href = '/ehr/user/doRetrieve.do';
+          }
+          else {
+            alert(message.message);
+          }
+      },
+      error: function(response) {
+          console.log("error:" + response);
+      }
+  });
+
+});
+
+
+  const moveToListButton = document.querySelector("#moveToList");
+
+  moveToListButton.addEventListener("click",function(event) {
+    console.log('moveToListButton click');
+
+    if(confirm('회원 목록으로 이동하시겠습니까?') === false) return;
+
+    window.location.href = "/ehr/user/doRetrieve.do";
+  });
+});
