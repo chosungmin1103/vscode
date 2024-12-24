@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded',function() {
           if(message.messageId == 1) { //등록 성공
             alert(message.message);
             //목록으로 화면 이동.
-            window.location.href = '/ehr/user/doRetrieve.do';
+            window.location.href = '/user/doRetrieve.do';
           }
           else {
             alert(message.message);
@@ -136,6 +136,6 @@ document.addEventListener('DOMContentLoaded',function() {
 
     if(confirm('회원 목록으로 이동하시겠습니까?') === false) return;
 
-    window.location.href = "/ehr/user/doRetrieve.do";
+    window.location.href = "/user/doRetrieve.do";
   });
 });

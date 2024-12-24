@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- FullCalendar CSS 파일 로드 -->
+  <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.5/main.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.5/main.min.css" rel="stylesheet" />
+  
+  <!-- FullCalendar JS 파일 로드 -->
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.5/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.5/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.5/main.min.js"></script>
+  
+  <!-- 자신의 JavaScript 파일 연결 -->
+  <script src="mypage.js"></script>
   <title>마이 페이지</title>
   <style>
     body {
@@ -45,8 +56,8 @@
       gap: 20px;
       padding: 20px;
     }
-    .calendar {
-      width: 500px;
+    #calendar {
+      width: auto; /* FullCalendar가 차지할 공간의 너비를 100%로 설정 */
       height: 500px;
     }
     .information,
@@ -60,41 +71,41 @@
       border-radius: 30px;
     }
     form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  form label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-  }
-  form input {
-    flex: 1;
-    max-width: 300px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  form .btn-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  form .save-btn,
-  form .cancel-btn {
-    width: 120px;
-    padding: 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-  }
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    form label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+    form input {
+      flex: 1;
+      max-width: 300px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    form .btn-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    form .save-btn,
+    form .cancel-btn {
+      width: 120px;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
     .reservation-block {
       width: 90%;
       padding: 10px;
@@ -104,9 +115,9 @@
       border-radius: 5px;
     }
   </style>
+
 </head>
 <body id="container">
-  <!-- 헤더 -->
   <header>
     <h2>MY PAGE</h2>
     <div class="div">
@@ -115,25 +126,21 @@
     </div>
   </header>
   
-  <!-- 날짜와 정보 수정 폼 -->
   <div class="date">
-    <!-- 구글 캘린더 -->
-    <iframe
-      class="calendar"
-      src="https://calendar.google.com/calendar/embed?height=500&wkst=1&ctz=Asia%2FSeoul&showPrint=0&src=OGFhZmI5YTA2OTQ4YTFmMGNkOTY3OWY0NzNkZjk4YzJhNWMzYTMyNWYyMTM3MzM3MDA4ZjMwYmJmZmY2NDQzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%237CB342"
-      frameborder="0" scrolling="no">
-    </iframe>
+    <!-- FullCalendar -->
+    <div id="calendar" class="calendar"></div>
 
     <!-- 정보 수정 폼 -->
     <div class="information">
-      <form action='a.jsp'>
+      <p style="font-weight: bold; font-size: 24px;">정보 관리</p>
+      <form action='a.jsp'>     
         <label>ID: <input type='text' placeholder="아이디 입력"/></label>
         <label>PASSWORD: <input type='password' placeholder="비밀번호 입력"/></label>
         <label>이름: <input type="text" placeholder="이름 입력"/></label>
         <label>연락처: <input type="tel" placeholder="연락처 입력"/></label>
         <label>이메일: <input type="email" placeholder="이메일 입력"/></label>
         <div class="btn-container">
-          <button type="submit" class="save-btn" onclick="return confirmSave()">저장</button>
+          <button type="submit" class="save-btn" onclick="return confirmSave()">수정</button>
           <button type="reset" class="cancel-btn" onclick="return confirmCancel()">취소</button>
         </div>
       </form>
@@ -141,38 +148,11 @@
 
     <!-- 예약 관리 -->
     <div class="reservation">
-      <p style="font-weight: bold; font-size: 18px;">예약 관리</p>
+      <p style="font-weight: bold; font-size: 24px;">예약 관리</p>
       <div class="reservation-block">예약 날짜</div>
       <div class="reservation-block">예약 병원</div>
       <div class="reservation-block">예약 상태</div>
     </div>
   </div>
-
-  <script>
-    function goToHome() {
-    if (confirm("홈페이지로 이동하시겠습니까?")) {
-      location.href = "MAIN.html";
-    }
-  }
-  
-  // LOGOUT 버튼
-  function logout() {
-    if (confirm("로그아웃 하시겠습니까?")) {
-      location.href = "MAIN.html";
-    }
-  }
-  
-  // 저장 버튼
-  function confirmSave() {
-    return confirm("저장하시겠습니까?");
-  }
-  
-  // 취소 버튼
-  function confirmCancel() {
-    return confirm("취소하시겠습니까?");
-  }
-  </script>
-    <!-- 외부 스크립트 연결 -->
-    <script src="mypage.js"></script>
 </body>
 </html>

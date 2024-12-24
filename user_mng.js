@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
   function moveToList(){
-    window.location.href= '/ehr/user/doRetrieve.do';
+    window.location.href= '/user/doRetrieve.do';
   }
 
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "/ehr/user/doUpdate.do",
       async: true,
       dataType: "html",
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded',function(){
           if(1==message.messageId){//수정 성공
             alert(message.message);
             //목록으로 화면 이동
-            window.location.href=`/ehr/user/doRetrieve.do`
+            moveToList();
           }else{
             alert(message.message);
           }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
       $.ajax({
         type: "POST",
-        url: "/ehr/user/doDelete.do",
+        url: "/user/doDelete.do",
         async: true,
         dataType: "html",
         data: {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
             if(1==message.messageId){
               alert(message.message);
-              window.location.href=`/ehr/user/doRetrieve.do`
+              window.location.href=`/user/doRetrieve.do`
             }else{
               alert(message.message);
             }
